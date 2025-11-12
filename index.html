@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSF Informatic Solutions - Desarrollo de Software</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Paleta principal inspirada en Yape (Morado/Índigo)
+                        primary: {
+                            light: '#4f46e5', // indigo-600
+                            DEFAULT: '#3730a3', // indigo-800
+                            dark: '#1e1b4b',   // indigo-950
+                        },
+                        // Paleta de acento inspirada en Yape (Amarillo/Lima)
+                        accent: {
+                            DEFAULT: '#facc15', // yellow-400
+                            light: '#fef08a', // yellow-200
+                        }
+                    },
+                    fontFamily: {
+                        // Fuente moderna y limpia
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos personalizados para Owl Carousel y compatibilidad */
+        .owl-carousel .owl-item img {
+            display: inline-block;
+            width: auto;
+        }
+        .owl-dots {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        .owl-dot {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background: #d6d6d6 !important;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .owl-dot.active {
+            background: theme('colors.primary.DEFAULT') !important;
+        }
+        /* Clases de WOW.js para compatibilidad */
+        .wow {
+            visibility: hidden;
+        }
+        
+        /* Estilo para el botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        .whatsapp-float i {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-white text-gray-900">
+
+    <div id="spinner" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition-opacity duration-500">
+        <div class="w-16 h-16 border-4 border-primary-light border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+    <div class="bg-gray-100 p-2 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-700">
+                <div class="flex items-center mb-2 sm:mb-0">
+                    <i class="fa fa-phone-alt text-primary-light mr-2"></i>
+                    <span>Llámanos: +51 960 597 242</span>
+                </div>
+                <div class="flex items-center mb-2 sm:mb-0">
+                    <i class="fa fa-headset text-primary-light mr-2"></i>
+                    <span>Soporte 24/7</span>
+                </div>
+                <div class="flex items-center">
+                    <a href="https://web.facebook.com/Dsfinformaticsolutions" target="_blank" class="text-primary-light hover:text-primary-dark transition-colors duration-300" aria-label="Facebook">
+                        <i class="fab fa-facebook-f fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white shadow-md sticky top-0 z-40 wow fadeIn" data-wow-delay="0.2s">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-3xl font-bold text-primary-dark">
+                    <img src="./assets/logo.jpg" alt="Logo DSF Informatic Solutions" class="h-10 w-auto">
+                </a>
+
+                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-primary-dark focus:outline-none focus:ring-2 focus:ring-primary-light">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#inicio" class="text-gray-700 hover:text-primary transition-colors duration-300 font-medium">Inicio</a>
+                    <a href="#nosotros" class="text-gray-700 hover:text-primary transition-colors duration-300 font-medium">Sobre Nosotros</a>
+                    <a href="#servicios" class="text-gray-700 hover:text-primary transition-colors duration-300 font-medium">Servicios</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-primary transition-colors duration-300 font-medium">Contacto</a>
+                    <a href="httpsS://soporte.dsfinformaticsolutions.com" target="_blank" class="bg-primary-light text-white font-bold py-2 px-5 rounded-full shadow-lg hover:bg-indigo-500 transition-all duration-300 transform hover:-translate-y-0.5">
+                        Service Desk <i class="fa fa-headset ml-2"></i>
+                    </a>
+                    <a href="#contacto" class="bg-accent-DEFAULT text-primary-dark font-bold py-2 px-5 rounded-full shadow-lg hover:bg-accent-light hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                        Cotizar Ahora <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-lg absolute top-full left-0 w-full z-30 animate__animated animate__fadeInDown animate__faster">
+            <div class="flex flex-col p-4 space-y-4">
+                <a href="#inicio" class="text-gray-700 hover:text-primary transition-colors duration-300 font-medium">Inicio</a>
+                <a href="#nosotros" class="text-gray-700 hover:text-primary transition-colors duration-300 font-medium">Sobre Nosotros</a>
+                <a href="#servicios" class="text-gray-700 hover:text-primary transition-colors duration-300 font-medium">Servicios</a>
+                <a href="#contacto" class="text-gray-700 hover:text-primary transition-colors duration-300 font-medium">Contacto</a>
+                <a href="httpsS://soporte.dsfinformaticsolutions.com" target="_blank" class="bg-primary-light text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-indigo-500 text-center transition-all duration-300">
+                    Service Desk
+                </a>
+                <a href="#contacto" class="bg-accent-DEFAULT text-primary-dark font-bold py-3 px-5 rounded-full shadow-lg hover:bg-accent-light text-center transition-all duration-300">
+                    Cotizar Ahora
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="inicio" class="relative bg-primary-dark text-white pt-24 pb-32 md:pt-32 md:pb-40 overflow-hidden">
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="wow fadeInLeft" data-wow-delay="0.3s">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
+                        Soluciones de Software <span class="text-accent-DEFAULT">a tu Medida</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-indigo-200 mb-8 max-w-lg">
+                        Impulsamos tu negocio con tecnología de punta. SaaS, Facturación, Transporte, Hotelería y más.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#servicios" class="bg-accent-DEFAULT text-primary-dark font-bold py-3 px-8 rounded-full shadow-lg hover:bg-accent-light hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 text-center">
+                            Ver Servicios
+                        </a>
+                        <a href="#contacto" class="bg-primary-light text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 text-center">
+                            Contáctanos
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden lg:block wow fadeInRight" data-wow-delay="0.5s">
+                    <img src="./assets/logo.jpg" class="rounded-lg shadow-2xl" alt="DSF Informatic Solutions">
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-32 bg-white" style="clip-path: polygon(100% 100%, 0% 100%, 0% 0%);"></div>
+    </header>
+
+    <section id="nosotros" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="rounded-lg shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-500">
+                        <img src="https://placehold.co/600x450/4f46e5/ffffff?text=Equipo+DSF" class="w-full h-auto" alt="Equipo de DSF Informatic Solutions">
+                    </div>
+                </div>
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <h2 class="text-sm font-bold text-primary-light uppercase tracking-wider mb-2"># Sobre Nosotros</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-primary-dark mb-6">
+                        Expertos en Desarrollo de Software y Servicios Informáticos
+                    </h3>
+                    <p class="text-gray-600 text-lg mb-4">
+                        Somos una empresa formada por profesionales en distintas áreas de ingeniería, con bases sólidas y amplio conocimiento. Nuestro principal objetivo es brindar soluciones para todo tipo de proyecto y a su vez llevar el mantenimiento de estos.
+                    </p>
+                    <p class="text-gray-600 text-lg mb-6">
+                        Bajo la dirección del <strong>Ing. Luis Heinor Flores Trujillo (RUC: 10444079857)</strong>, nuestro equipo se compromete con la excelencia, entregando sistemas robustos y escalables.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="far fa-check-circle text-accent-DEFAULT text-2xl mr-4"></i>
+                            <h5 class="text-lg font-semibold text-gray-800">Desarrollo Personalizado y SaaS</h5>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="far fa-check-circle text-accent-DEFAULT text-2xl mr-4"></i>
+                            <h5 class="text-lg font-semibold text-gray-800">Soporte Técnico 24/7 Garantizado</h5>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="far fa-check-circle text-accent-DEFAULT text-2xl mr-4"></i>
+                            <h5 class="text-lg font-semibold text-gray-800">Consultoría Experta para tu Negocio</h5>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="far fa-check-circle text-accent-DEFAULT text-2xl mr-4"></i>
+                            <h5 class="text-lg font-semibold text-gray-800">Optimización de Procesos de Negocio</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-primary-dark text-white py-20 my-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <i class="fa fa-users fa-3x text-accent-DEFAULT mb-4"></i>
+                    <h4 class="text-4xl font-bold mb-2">150+</h4>
+                    <p class="text-indigo-200 text-lg">Clientes Satisfechos</p>
+                </div>
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <i class="fa fa-code fa-3x text-accent-DEFAULT mb-4"></i>
+                    <h4 class="text-4xl font-bold mb-2">300+</h4>
+                    <p class="text-indigo-200 text-lg">Proyectos Completados</p>
+                </div>
+                <div class="wow fadeInUp" data-wow-delay="0.5s">
+                    <i class="fa fa-headset fa-3x text-accent-DEFAULT mb-4"></i>
+                    <h4 class="text-4xl font-bold mb-2">24/7</h4>
+                    <p class="text-indigo-200 text-lg">Soporte Activo</p>
+                </div>
+                <div class="wow fadeInUp" data-wow-delay="0.7s">
+                    <i class="fa fa-trophy fa-3x text-accent-DEFAULT mb-4"></i>
+                    <h4 class="text-4xl font-bold mb-2">8+</h4>
+                    <p class="text-indigo-200 text-lg">Años de Experiencia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 wow fadeInUp" data-wow-delay="0.1s">
+                <h2 class="text-sm font-bold text-primary-light uppercase tracking-wider mb-2"># Nuestras Soluciones</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-primary-dark">
+                    Un Portafolio Completo para cada Sector
+                </h3>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-cloud fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Sistemas SaaS</h4>
+                    <p class="text-gray-600">Soluciones en la nube listas para escalar.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-hotel fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Sistema de Hotel</h4>
+                    <p class="text-gray-600">Gestión completa de reservaciones y administración.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-file-invoice-dollar fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Facturación Electrónica</h4>
+                    <p class="text-gray-600">Cumplimiento fiscal y control de ingresos.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-dolly-flatbed fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Sistema de Distribución</h4>
+                    <p class="text-gray-600">Optimización de logística e inventario.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-truck fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Sistema de Transportes</h4>
+                    <p class="text-gray-600">Gestión de flotas, rutas y carga.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-hand-holding-usd fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Sistema de Préstamos</h4>
+                    <p class="text-gray-600">Control de créditos, pagos y cartera.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-utensils fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Sistema de Restaurant</h4>
+                    <p class="text-gray-600">Punto de venta, comandas y gestión de mesas.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.8s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-taxi fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Sistema de Taxi</h4>
+                    <p class="text-gray-600">Gestión de flotas en tiempo real y app de pasajeros.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-server fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Servidores y Alojamiento</h4>
+                    <p class="text-gray-600">VPS, Dedicados y Correos Corporativos.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-network-wired fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Redes y Comunicaciones</h4>
+                    <p class="text-gray-600">Instalación, enlaces inalámbricos y telefonía IP.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-microchip fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Electrónica y Seguridad</h4>
+                    <p class="text-gray-600">Electricidad comercial/industrial y sistemas de seguridad.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 hover:shadow-2xl transition-all duration-500 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="bg-primary-light text-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                        <i class="fa fa-headset fa-3x"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary-dark mb-3">Soporte Técnico TI</h4>
+                    <p class="text-gray-600">Soporte remoto, mantenimiento y consultoría TI.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="bg-primary-light text-white py-20 my-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                    <h3 class="text-3xl font-bold text-white mb-6">Horarios de Atención</h3>
+                    <ul class="divide-y divide-indigo-400">
+                        <li class="flex justify-between items-center py-4">
+                            <span class="text-lg font-medium text-indigo-100">Atención en Oficina</span>
+                            <span class="font-bold text-lg"></span>
+                        </li>
+                        <li class="flex justify-between items-center py-4">
+                            <span class="text-lg text-indigo-100">Lunes - Viernes</span>
+                            <span class="font-bold text-lg text-accent-light">9:00 AM - 6:00 PM</span>
+                        </li>
+                        <li class="flex justify-between items-center py-4">
+                            <span class="text-lg text-indigo-100">Sábados</span>
+                            <span class="font-bold text-lg text-accent-light">9:00 AM - 1:00 PM</span>
+                        </li>
+                        <li class="flex justify-between items-center py-4">
+                            <span class="text-lg font-medium text-indigo-100">Soporte Técnico</span>
+                            <span class="font-bold text-lg"></span>
+                        </li>
+                         <li class="flex justify-between items-center py-4">
+                            <span class="text-lg text-indigo-100">Lunes - Domingo</span>
+                            <span class="font-bold text-lg text-accent-light">24 Horas</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="wow fadeInRight" data-wow-delay="0.4s">
+                    <h3 class="text-3xl font-bold text-white mb-6">Información de Contacto</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <i class="fa fa-phone-alt fa-2x text-accent-DEFAULT mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="text-xl font-semibold text-accent-light mb-1">Teléfono / WhatsApp</h4>
+                                <p class="text-lg text-indigo-100">+51 960 597 242</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa fa-envelope fa-2x text-accent-DEFAULT mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="text-xl font-semibold text-accent-light mb-1">Email</h4>
+                                <p class="text-lg text-indigo-100">lflorest2787@gmail.com</p>
+                                <p class="text-lg text-indigo-100">Gerencia@dsfinformaticsolutions.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa fa-map-marker-alt fa-2x text-accent-DEFAULT mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="text-xl font-semibold text-accent-light mb-1">Dirección</h4>
+                                <p class="text-lg text-indigo-100">JR. Los laureles 434 - Paucarbambilla, Perú</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fab fa-facebook-f fa-2x text-accent-DEFAULT mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="text-xl font-semibold text-accent-light mb-1">Facebook</h4>
+                                <a href="https://web.facebook.com/Dsfinformaticsolutions" target="_blank" class="text-lg text-indigo-100 hover:text-white transition-colors">/Dsfinformaticsolutions</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <button id="openModalButton" class="w-full bg-accent-DEFAULT text-primary-dark font-bold py-4 px-6 rounded-full shadow-lg hover:bg-accent-light transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center text-lg">
+                            <i class="fas fa-magic mr-3"></i>
+                            ✨ Cotizar con Asistente IA(DSF)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary-dark text-gray-300 pt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div>
+                    <h4 class="text-2xl font-bold text-white mb-6">DSF Solutions</h4>
+                    <p class="text-indigo-200 mb-4">
+                        Soluciones de software innovadoras. <br>
+                        Ing. Luis Heinor Flores Trujillo <br>
+                        RUC: 10444079857
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="https://web.facebook.com/Dsfinformaticsolutions" target="_blank" class="w-10 h-10 bg-primary-light text-white rounded-full flex items-center justify-center hover:bg-accent-DEFAULT hover:text-primary-dark transition-all duration-300" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        </div>
+                </div>
+
+                <div>
+                    <h5 class="text-xl font-semibold text-white mb-6">Contacto Rápido</h5>
+                    <ul class="space-y-4 text-indigo-200">
+                        <li class="flex items-start">
+                            <i class="fa fa-phone-alt text-accent-DEFAULT mt-1 mr-3"></i>
+                            <span>+51 960 597 242</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-envelope text-accent-DEFAULT mt-1 mr-3"></i>
+                            <span>Gerencia@dsfinformaticsolutions.com</span>
+                        </li>
+                         <li class="flex items-start">
+                            <i class="fa fa-envelope text-accent-DEFAULT mt-1 mr-3"></i>
+                            <span>lflorest2787@gmail.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-map-marker-alt text-accent-DEFAULT mt-1 mr-3"></i>
+                            <span>JR. Los laureles 434 - Paucarbambilla, Perú</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-xl font-semibold text-white mb-6">Enlaces Rápidos</h5>
+                    <ul class="space-y-3">
+                        <li><a href="#inicio" class="text-indigo-200 hover:text-white hover:pl-2 transition-all duration-300 block">Inicio</a></li>
+                        <li><a href="#nosotros" class="text-indigo-200 hover:text-white hover:pl-2 transition-all duration-3D00 block">Sobre Nosotros</a></li>
+                        <li><a href="#servicios" class="text-indigo-200 hover:text-white hover:pl-2 transition-all duration-300 block">Nuestros Servicios</a></li>
+                        <li><a href="#contacto" class="text-indigo-200 hover:text-white hover:pl-2 transition-all duration-300 block">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-xl font-semibold text-white mb-6">Newsletter</h5>
+                    <p class="text-indigo-200 mb-4">Suscríbete para recibir noticias y ofertas especiales.</p>
+                    <form>
+                        <div class="relative">
+                            <input type="email" placeholder="Tu email" class="w-full py-3 px-4 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-accent-DEFAULT">
+                            <button type="submit" class="absolute right-0 top-0 h-full bg-accent-DEFAULT text-primary-dark font-bold py-3 px-6 rounded-r-full hover:bg-accent-light transition-colors duration-300">
+                                <i class="fa fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-16 pt-8 border-t border-indigo-800 text-center">
+                <p class="text-indigo-300 text-sm">
+                    &copy; <span id="current-year"></span> DSF Informatic Solutions. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal del Asistente IA -->
+    <div id="aiAssistantModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4 hidden animate__animated animate__fadeIn animate__faster" style="--animate-duration: 0.3s;">
+        <div class="bg-white w-full max-w-3xl h-[90vh] max-h-[800px] rounded-lg shadow-2xl flex flex-col transform animate__animated animate__zoomIn animate__faster" style="--animate-duration: 0.3s;">
+            
+            <!-- Header fijo -->
+            <div class="flex justify-between items-center p-4 md:p-6 border-b border-gray-200 flex-shrink-0">
+                <div class="flex items-center space-x-3">
+                    <img src="./assets/logo.jpg" alt="Logo DSF" class="h-12 w-12 rounded-full border-2 border-primary-light p-1 flex-shrink-0">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-primary-dark">DSF IA</h3>
+                        <p class="text-xs text-gray-500">En línea • Potenciado por Gemini</p>
+                    </div>
+                </div>
+                <button id="closeModalButton" class="text-gray-400 hover:text-gray-800 transition-colors duration-200 p-2">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+            </div>
+
+            <!-- Área de conversación con scroll -->
+            <div id="chatContainer" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 bg-gray-50">
+                <!-- Mensaje de bienvenida -->
+                <div class="flex items-start space-x-3 animate__animated animate__fadeInUp">
+                    <img src="./assets/logo.jpg" alt="Logo DSF" class="h-10 w-10 rounded-full border border-primary-light p-0.5 flex-shrink-0">
+                    <div class="flex-1 max-w-[85%]">
+                        <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none p-4 shadow-sm">
+                            <p class="text-gray-800 text-sm md:text-base">¡Hola! 👋 Soy tu asistente de cotización. Cuéntame sobre tu proyecto y te haré preguntas clave para darte la mejor solución.</p>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 ml-2">Justo ahora</p>
+                    </div>
+                </div>
+                
+                <div id="aiError" class="bg-red-100 border border-red-300 text-red-800 rounded-lg p-4 hidden animate__animated animate__shakeX">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="aiErrorText"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input fijo al fondo -->
+            <div class="border-t border-gray-200 p-4 bg-white flex-shrink-0">
+                <div class="flex items-end space-x-3">
+                    <textarea 
+                        id="projectDescription" 
+                        rows="1"
+                        class="flex-1 resize-none p-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-primary-light focus:outline-none focus:border-transparent text-sm md:text-base max-h-32 overflow-y-auto" 
+                        placeholder="Describe tu proyecto aquí..."></textarea>
+                    <button 
+                        id="analyzeButton" 
+                        class="bg-accent-DEFAULT text-primary-dark font-bold p-3 rounded-full shadow-lg hover:bg-accent-light transition-all duration-300 flex items-center justify-center flex-shrink-0 w-12 h-12">
+                        <i id="analyzeButtonIcon" class="fas fa-paper-plane"></i>
+                        <div id="loadingSpinner" class="w-5 h-5 border-2 border-primary-dark border-t-transparent rounded-full animate-spin hidden"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a id="back-to-top" href="#" class="fixed bottom-6 right-6 z-30 bg-accent-DEFAULT text-primary-dark w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-accent-light transition-all duration-300 opacity-0 transform translate-y-4" style="transition: opacity 0.3s, transform 0.3s;">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+
+    <a href="https://wa.me/51960597242?text=Hola,%20vengo%20de%20su%20página%20web%20y%20quisiera%20más%20información." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    
+    <script>
+        // --- Lógica del Asistente IA de Gemini ---
+
+        const apiKey = "AIzaSyDkoeLo5EtNDO7aRq5O4wami_aCUHILKk8";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        const systemPrompt = `Eres un consultor senior de software de la empresa "DSF Informatic Solutions", tu nombre es DSF AI. Un cliente potencial te describirá su necesidad. 
+
+IMPORTANTE: Debes responder SIEMPRE usando esta estructura XML exacta:
+
+<respuesta>
+<saludo>Saludo inicial amigable y personalizado</saludo>
+<analisis>Análisis breve del proyecto mencionado (2-3 líneas)</analisis>
+<servicios>
+<servicio>Nombre del servicio relevante 1</servicio>
+<servicio>Nombre del servicio relevante 2</servicio>
+</servicios>
+<preguntas>
+<pregunta>Pregunta clave 1</pregunta>
+<pregunta>Pregunta clave 2</pregunta>
+<pregunta>Pregunta clave 3</pregunta>
+<pregunta>Pregunta clave 4</pregunta>
+</preguntas>
+<cierre>Mensaje de cierre invitando a contactar por WhatsApp (+51 960 597 242) o email para cotización formal</cierre>
+</respuesta>
+
+Servicios disponibles: Sistemas SaaS, Sistema de Hotel, Facturación Electrónica, Sistema de Distribución, Sistema de Transportes, Sistema de Préstamos, Sistema de Restaurant, Sistema de Taxi, Servidores y Alojamiento, Redes y Comunicaciones, Electrónica y Seguridad, Soporte Técnico TI.
+
+Tono: Amigable, profesional, en español de Perú. Sé específico y relevante al proyecto del cliente.`;
+
+        function addUserMessage(message) {
+            const $chatContainer = $('#chatContainer');
+            const messageHtml = `
+                <div class="flex items-start justify-end space-x-3 animate__animated animate__fadeInUp animate__faster">
+                    <div class="max-w-[85%]">
+                        <div class="bg-primary-light text-white rounded-2xl rounded-tr-none p-4 shadow-sm">
+                            <p class="text-sm md:text-base">${escapeHtml(message)}</p>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 mr-2 text-right">Justo ahora</p>
+                    </div>
+                </div>
+            `;
+            $chatContainer.append(messageHtml);
+            scrollToBottom();
+        }
+
+        function parseAIResponse(xmlString) {
+            try {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+                
+                // Verificar si hay errores de parseo
+                if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
+                    console.error("Error parseando XML");
+                    return null;
+                }
+                
+                const saludo = xmlDoc.querySelector('saludo')?.textContent || '';
+                const analisis = xmlDoc.querySelector('analisis')?.textContent || '';
+                const servicios = Array.from(xmlDoc.querySelectorAll('servicio')).map(s => s.textContent);
+                const preguntas = Array.from(xmlDoc.querySelectorAll('pregunta')).map(p => p.textContent);
+                const cierre = xmlDoc.querySelector('cierre')?.textContent || '';
+                
+                return { saludo, analisis, servicios, preguntas, cierre };
+            } catch (error) {
+                console.error("Error en parseAIResponse:", error);
+                return null;
+            }
+        }
+
+        function addFormattedAIMessage(parsedData) {
+            const $chatContainer = $('#chatContainer');
+            
+            let messageHtml = `
+                <div class="flex items-start space-x-3 animate__animated animate__fadeInUp animate__faster">
+                    <img src="./assets/logo.jpg" alt="Logo DSF" class="h-10 w-10 rounded-full border border-primary-light p-0.5 flex-shrink-0">
+                    <div class="flex-1 max-w-[85%] space-y-3">
+            `;
+            
+            // Saludo
+            if (parsedData.saludo) {
+                messageHtml += `
+                    <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-2xl rounded-tl-none p-4 shadow-sm">
+                        <p class="text-gray-800 text-sm md:text-base">${escapeHtml(parsedData.saludo)}</p>
+                    </div>
+                `;
+            }
+            
+            // Análisis
+            if (parsedData.analisis) {
+                messageHtml += `
+                    <div class="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm">
+                        <div class="flex items-start space-x-2">
+                            <i class="fas fa-lightbulb text-yellow-500 text-lg mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-primary-dark text-sm mb-1">Análisis del Proyecto</h4>
+                                <p class="text-gray-700 text-sm">${escapeHtml(parsedData.analisis)}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Servicios recomendados
+            if (parsedData.servicios && parsedData.servicios.length > 0) {
+                messageHtml += `
+                    <div class="bg-white border border-green-200 rounded-2xl p-4 shadow-sm">
+                        <div class="flex items-start space-x-2">
+                            <i class="fas fa-check-circle text-green-500 text-lg mt-1"></i>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-primary-dark text-sm mb-2">Servicios Recomendados</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    ${parsedData.servicios.map(servicio => 
+                                        `<span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full border border-green-300">
+                                            ${escapeHtml(servicio)}
+                                        </span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Preguntas
+            if (parsedData.preguntas && parsedData.preguntas.length > 0) {
+                messageHtml += `
+                    <div class="bg-white border border-blue-200 rounded-2xl p-4 shadow-sm">
+                        <div class="flex items-start space-x-2">
+                            <i class="fas fa-question-circle text-blue-500 text-lg mt-1"></i>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-primary-dark text-sm mb-2">Preguntas Clave para tu Cotización</h4>
+                                <ul class="space-y-2">
+                                    ${parsedData.preguntas.map((pregunta, index) => 
+                                        `<li class="flex items-start space-x-2">
+                                            <span class="bg-blue-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">${index + 1}</span>
+                                            <span class="text-gray-700 text-sm">${escapeHtml(pregunta)}</span>
+                                        </li>`
+                                    ).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Cierre con CTA
+            if (parsedData.cierre) {
+                messageHtml += `
+                    <div class="bg-gradient-to-r from-accent-light to-accent-DEFAULT border border-yellow-300 rounded-2xl p-4 shadow-sm">
+                        <div class="flex items-start space-x-2">
+                            <i class="fas fa-paper-plane text-primary-dark text-lg mt-1"></i>
+                            <div class="flex-1">
+                                <p class="text-primary-dark text-sm font-medium">${escapeHtml(parsedData.cierre)}</p>
+                                <div class="mt-3 flex flex-col sm:flex-row gap-2">
+                                    <a href="https://wa.me/51960597242?text=Hola,%20vengo%20del%20asistente%20IA" target="_blank" 
+                                       class="bg-green-500 hover:bg-green-600 text-white text-xs font-bold py-2 px-4 rounded-full transition-all duration-300 text-center flex items-center justify-center">
+                                        <i class="fab fa-whatsapp mr-2"></i> Contactar por WhatsApp
+                                    </a>
+                                    <a href="mailto:Gerencia@dsfinformaticsolutions.com" 
+                                       class="bg-primary-dark hover:bg-primary-light text-white text-xs font-bold py-2 px-4 rounded-full transition-all duration-300 text-center flex items-center justify-center">
+                                        <i class="fas fa-envelope mr-2"></i> Enviar Email
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            messageHtml += `
+                        <p class="text-xs text-gray-500 mt-1 ml-2">Justo ahora</p>
+                    </div>
+                </div>
+            `;
+            
+            $chatContainer.append(messageHtml);
+            scrollToBottom();
+        }
+
+        function addSimpleAIMessage(message) {
+            const $chatContainer = $('#chatContainer');
+            const messageHtml = `
+                <div class="flex items-start space-x-3 animate__animated animate__fadeInUp animate__faster">
+                    <img src="./assets/logo.jpg" alt="Logo DSF" class="h-10 w-10 rounded-full border border-primary-light p-0.5 flex-shrink-0">
+                    <div class="flex-1 max-w-[85%]">
+                        <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none p-4 shadow-sm">
+                            <p class="text-gray-800 text-sm md:text-base whitespace-pre-wrap">${escapeHtml(message)}</p>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1 ml-2">Justo ahora</p>
+                    </div>
+                </div>
+            `;
+            $chatContainer.append(messageHtml);
+            scrollToBottom();
+        }
+
+        function addTypingIndicator() {
+            const $chatContainer = $('#chatContainer');
+            const typingHtml = `
+                <div id="typingIndicator" class="flex items-start space-x-3 animate__animated animate__fadeInUp animate__faster">
+                    <img src="./assets/logo.jpg" alt="Logo DSF" class="h-10 w-10 rounded-full border border-primary-light p-0.5 flex-shrink-0">
+                    <div class="bg-white border border-gray-200 rounded-2xl rounded-tl-none p-4 shadow-sm">
+                        <div class="flex space-x-2">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0s;"></div>
+                            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $chatContainer.append(typingHtml);
+            scrollToBottom();
+        }
+
+        function removeTypingIndicator() {
+            $('#typingIndicator').remove();
+        }
+
+        function scrollToBottom() {
+            const $chatContainer = $('#chatContainer');
+            $chatContainer.animate({ scrollTop: $chatContainer[0].scrollHeight }, 300);
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        function showError(message) {
+            $('#aiErrorText').text(message);
+            $('#aiError').removeClass('hidden');
+        }
+
+        async function callGeminiApi(userQuery, retries = 3) {
+            try {
+                const payload = {
+                    contents: [{
+                        parts: [{ text: userQuery }]
+                    }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    if (retries > 0 && (response.status === 429 || response.status >= 500)) {
+                        console.warn(`API call failed with status ${response.status}. Retrying... (${retries - 1} left)`);
+                        await new Promise(resolve => setTimeout(resolve, (4 - retries) * 1000));
+                        return callGeminiApi(userQuery, retries - 1);
+                    }
+                    throw new Error(`Error en la API de Gemini: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    
+                    $('#aiError').addClass('hidden');
+                    $('#aiErrorText').text('');
+                    
+                    removeTypingIndicator();
+                    const aiText = result.candidates[0].content.parts[0].text;
+                    
+                    // Intentar parsear la respuesta XML
+                    const parsedData = parseAIResponse(aiText);
+                    
+                    if (parsedData && (parsedData.saludo || parsedData.analisis || parsedData.preguntas.length > 0)) {
+                        // Si el parseo fue exitoso, mostrar formato elegante
+                        addFormattedAIMessage(parsedData);
+                    } else {
+                        // Si falla el parseo, mostrar texto plano (fallback)
+                        console.warn("Respuesta sin formato XML válido, usando fallback");
+                        addSimpleAIMessage(aiText);
+                    }
+
+                } else {
+                    console.error("Respuesta inesperada de la API:", result);
+                    removeTypingIndicator();
+                    showError('La IA no pudo procesar esta solicitud. Por favor, intenta ser más específico.');
+                }
+
+            } catch (error) {
+                console.error('Error al llamar a la API de Gemini:', error);
+                if (retries > 0) {
+                    console.warn(`API call failed. Retrying... (${retries - 1} left)`);
+                    await new Promise(resolve => setTimeout(resolve, (4 - retries) * 1000));
+                    return callGeminiApi(userQuery, retries - 1);
+                }
+                removeTypingIndicator();
+                showError('Error de conexión con el asistente de IA. Por favor, revisa tu conexión o intenta más tarde.');
+            } finally {
+                $('#loadingSpinner').addClass('hidden');
+                $('#analyzeButtonIcon').removeClass('hidden');
+                $('#analyzeButton').prop('disabled', false);
+            }
+        }
+
+        $(document).ready(function() {
+            // --- INICIO: Lógica del Asistente IA ---
+            const $modal = $('#aiAssistantModal');
+            const $analyzeButton = $('#analyzeButton');
+            const $loadingSpinner = $('#loadingSpinner');
+            const $analyzeButtonIcon = $('#analyzeButtonIcon');
+            const $aiError = $('#aiError');
+            const $projectDescription = $('#projectDescription');
+            const $chatContainer = $('#chatContainer');
+
+            // Auto-ajustar altura del textarea
+            $projectDescription.on('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+
+            // Enviar con Enter (Shift+Enter para nueva línea)
+            $projectDescription.on('keypress', function(e) {
+                if (e.which === 13 && !e.shiftKey) {
+                    e.preventDefault();
+                    $analyzeButton.click();
+                }
+            });
+
+            // Abrir Modal
+            $('#openModalButton').on('click', function() {
+                $modal.removeClass('hidden');
+            });
+
+            // Cerrar Modal
+            $('#closeModalButton').on('click', function() {
+                $modal.addClass('hidden');
+                $modal.find('.animate__animated').removeClass('animate__zoomIn').addClass('animate__zoomOut');
+                setTimeout(() => {
+                    $modal.find('.animate__animated').removeClass('animate__zoomOut').addClass('animate__zoomIn');
+                    
+                    // Limpiar chat excepto mensaje de bienvenida
+                    $chatContainer.find('.animate__animated:not(:first)').remove();
+                    $('#typingIndicator').remove();
+                    
+                    $aiError.addClass('hidden');
+                    $('#aiErrorText').text('');
+                    $projectDescription.val('').css('height', 'auto');
+                }, 300);
+            });
+
+            // Clic en el fondo para cerrar
+            $modal.on('click', function(e) {
+                if (e.target.id === 'aiAssistantModal') {
+                    $('#closeModalButton').click();
+                }
+            });
+
+            // Clic en Analizar
+            $analyzeButton.on('click', function() {
+                const userQuery = $projectDescription.val().trim();
+                
+                if (!userQuery || userQuery.length < 10) {
+                    showError('Por favor, describe tu proyecto con más detalle (mínimo 10 caracteres).');
+                    return;
+                }
+
+                // Agregar mensaje del usuario
+                addUserMessage(userQuery);
+                
+                // Limpiar input
+                $projectDescription.val('').css('height', 'auto');
+                
+                // Mostrar spinner y typing indicator
+                $loadingSpinner.removeClass('hidden');
+                $analyzeButtonIcon.addClass('hidden');
+                $analyzeButton.prop('disabled', true);
+                
+                $aiError.addClass('hidden');
+                addTypingIndicator();
+
+                // Llamar a la API
+                callGeminiApi(userQuery);
+            });
+
+            // --- FIN: Lógica del Asistente IA ---
+
+            // Inicializar WOW.js
+            new WOW().init();
+
+            // Lógica del Spinner
+            $(window).on('load', function() {
+                $('#spinner').addClass('opacity-0').delay(500).fadeOut(500, function() {
+                    $(this).remove();
+                });
+            });
+
+            // Lógica del Menú Móvil
+            $('#mobile-menu-button').on('click', function() {
+                var menuIcon = $(this).find('i');
+                if (menuIcon.hasClass('fa-bars')) {
+                    menuIcon.removeClass('fa-bars').addClass('fa-times');
+                } else {
+                    menuIcon.removeClass('fa-times').addClass('fa-bars');
+                }
+                $('#mobile-menu').toggleClass('hidden');
+            });
+
+            // Cerrar menú móvil al hacer clic en un enlace
+            $('#mobile-menu a').on('click', function() {
+                $('#mobile-menu').addClass('hidden');
+                $('#mobile-menu-button').find('i').removeClass('fa-times').addClass('fa-bars');
+            });
+
+            // Lógica del Carrusel de Testimonios
+            $('.testimonial-carousel').owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: false,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    },
+                    1024: {
+                        items: 2
+                    }
+                }
+            });
+
+            // Lógica del Botón "Volver Arriba"
+            var backToTop = $('#back-to-top');
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    backToTop.css('opacity', '1').css('transform', 'translateY(0)');
+                } else {
+                    backToTop.css('opacity', '0').css('transform', 'translateY(1rem)');
+                }
+            });
+            backToTop.on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 800, 'swing');
+            });
+
+            // Scroll Suave para anclas
+            $('a[href*="#"]:not([href="#"])').click(function(e) {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        e.preventDefault();
+                        $('html, body').animate({
+                            scrollTop: target.offset().top - 80
+                        }, 800, 'swing');
+                        return false;
+                    }
+                }
+            });
+            
+            // Año actual en el footer
+            $('#current-year').text(new Date().getFullYear());
+        });
+    </script>
+
+</body>
+</html>
